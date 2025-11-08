@@ -65,28 +65,33 @@ sudo dnf install -y java-17-amazon-corretto java-17-amazon-corretto-devel
 
 **Branch:** `clean install`
 
-📦 Post-Build Actions
+#### 📦 Post-Build Actions
 
-Trigger next project → RegApp_CD_job
+**Trigger next project → RegApp_CD_job**
 
-Send artifacts over SSH
+**Send artifacts over SSH**
 
-Source files: webapp/target/\*.war
+**Source files: webapp/target/\*.war**
 
-Remove prefix: webapp/target
+**Remove prefix: webapp/target**
 
-Remote directory: /opt/Docker
+**Remote directory: /opt/Docker**
 
-Exec command:
-ansible-playbook /opt/Docker/creat_image_regapp.yml
+**Exec command: ansible-playbook /opt/Docker/creat_image_regapp.yml**
 
-🧩 RegApp_CD_job <br>
-Type: Freestyle Project <br>
-🧠 Post-Build Action <br>
-Send command via SSH to Ansible Server <br>
-ansible-playbook /opt/Docker/kube_deploy.yml <br>
+### 🧩 RegApp_CD_job <br>
 
-🧑‍💻 Ansible Server <br>
+**Type: Freestyle Project** <br>
+
+#### 🧠 Post-Build Action <br>
+
+**Send command via SSH to Ansible Server** <br>
+**ansible-playbook /opt/Docker/kube_deploy.yml** <br>
+
+---
+
+### 🧑‍💻 Ansible Server <br>
+
 Used to run automation playbooks that build Docker images and deploy them to Kubernetes.
 Playbooks location: /opt/Docker/
 <br>
