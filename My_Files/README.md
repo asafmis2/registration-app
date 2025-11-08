@@ -63,9 +63,7 @@ sudo dnf install -y java-17-amazon-corretto java-17-amazon-corretto-devel
 
 #### 🔨 Build Step
 
-```bash
-mvn clean install
-```
+**Branch:** `clean install`
 
 📦 Post-Build Actions
 
@@ -82,45 +80,29 @@ Remote directory: /opt/Docker
 Exec command:
 ansible-playbook /opt/Docker/creat_image_regapp.yml
 
-🧩 RegApp_CD_job
-Type: Freestyle Project
-🧠 Post-Build Action
-Send command via SSH to Ansible Server
-ansible-playbook /opt/Docker/kube_deploy.yml
+🧩 RegApp_CD_job <br>
+Type: Freestyle Project <br>
+🧠 Post-Build Action <br>
+Send command via SSH to Ansible Server <br>
+ansible-playbook /opt/Docker/kube_deploy.yml <br>
 
-🧑‍💻 Ansible Server
+🧑‍💻 Ansible Server <br>
 Used to run automation playbooks that build Docker images and deploy them to Kubernetes.
 Playbooks location: /opt/Docker/
+<br>
+☸️ EKS Cluster Setup <br>
+📘 Official documentation: AWS EKS User Guide <br>
 
-## Example Playbook
+🧱 Create a new cluster <br>
+eksctl create cluster --name virtualtechbox-cluster --region eu-west-3 --node-type t3.small <br>
 
-- hosts: kubernetes
-  become: yes
+📋 List existing clusters <br>
+aws cloudformation list-stacks --region eu-west-3 <br>
 
-  tasks:
-
-  - name: Deploy RegApp on Kubernetes
-    command: kubectl apply -f regapp-deployment.yml
-
-  - name: Create Service for RegApp
-    command: kubectl apply -f regapp-service.yml
-
-  - name: Restart deployment if image was updated
-    command: kubectl rollout restart deployment.apps/virtualtechbox-regapp
-
-☸️ EKS Cluster Setup
-📘 Official documentation: AWS EKS User Guide
-
-🧱 Create a new cluster
-eksctl create cluster --name virtualtechbox-cluster --region eu-west-3 --node-type t3.small
-
-📋 List existing clusters
-aws cloudformation list-stacks --region eu-west-3
-
-🧾 Summary
-✅ Jenkins automates build and deployment using CI/CD.  
-✅ Maven builds and packages the application.  
-✅ Artifacts are sent via SSH to Ansible.  
-✅ Ansible triggers Docker image creation and Kubernetes deployment on EKS.
+🧾 Summary <br>
+✅ Jenkins automates build and deployment using CI/CD. <br>
+✅ Maven builds and packages the application. <br>
+✅ Artifacts are sent via SSH to Ansible. <br>
+✅ Ansible triggers Docker image creation and Kubernetes deployment on EKS.<br>
 
 This setup enables full automation from source code to running containers in the cloud.
